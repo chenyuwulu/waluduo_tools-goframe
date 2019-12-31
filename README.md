@@ -88,17 +88,3 @@ go build main.go
 ## 感谢
 
 1. gf框架 [https://github.com/gogf/gf](https://github.com/gogf/gf) 
-
-## 项目支持
-
-- 项目的发展，离不开大家得支持~！~
-
-- [【双12】主会场 低至1折；请点击这里](https://www.aliyun.com/1212/2019/home?userCode=c4hsn0gc)
-- [阿里云：ECS云服务器2折起；请点击这里](https://www.aliyun.com/acts/limit-buy?spm=5176.11544616.khv0c5cu5.1.1d8e23e8XHvEIq&userCode=c4hsn0gc)
-- [阿里云：ECS云服务器新人优惠券；请点击这里](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=c4hsn0gc)
-
-- 也可以请作者喝一杯咖啡:)
-
-![jflyfox](https://raw.githubusercontent.com/jflyfox/jfinal_cms/master/doc/pay01.jpg "Open source support")
-
-[捐赠列表](deploy/Donate.md)
