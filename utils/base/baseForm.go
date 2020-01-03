@@ -1,6 +1,9 @@
 package base
 
-import "github.com/gogf/gf/util/gconv"
+import (
+	"github.com/gogf/gf/os/glog"
+	"github.com/gogf/gf/util/gconv"
+)
 
 type BaseForm struct {
 	Page      int    `form:"page",json:"page"`           // 当前页码
@@ -36,7 +39,7 @@ func NewForm(params map[string]interface{}) BaseForm {
 			form.OrderBy += " " + gconv.String(value3)
 		}
 	}
-
+	glog.Info("这里的form到底是多少",form)
 	return form
 }
 

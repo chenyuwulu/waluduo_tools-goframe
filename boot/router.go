@@ -4,6 +4,7 @@ import (
 	"github.com/goflyfox/gtoken/gtoken"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
+	"gmanager/module/api"
 	"gmanager/module/common"
 	"gmanager/module/component/middle"
 	"gmanager/module/constants"
@@ -60,6 +61,11 @@ func bindRouter() {
 		g.GET("/config/get/{id}", configAction.Get)
 		g.ALL("/config/delete/{id}", configAction.Delete)
 
+	})
+	//新增对应uniapp的api分组路由
+	s.Group(urlPath+"/api", func(g *ghttp.RouterGroup) {
+		indexAction := new(api.IndexAction)
+		g.ALL("index", indexAction)
 	})
 
 	// 启动gtoken

@@ -100,7 +100,7 @@ func (action *ConfigAction) List(r *ghttp.Request) {
 func (action *ConfigAction) Page(r *ghttp.Request) {
 	form := base.NewForm(r.GetPostMap())
 	model := SysConfig{}
-
+	glog.Info("访问到了这里",r.GetPostMap())
 	page := model.Page(&form)
 	base.Succ(r,
 		g.Map{

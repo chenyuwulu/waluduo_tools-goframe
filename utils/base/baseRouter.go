@@ -31,21 +31,21 @@ func GetUser(r *ghttp.Request) bean.SessionUser {
 }
 
 func Succ(r *ghttp.Request, data interface{}) {
-	r.Response.WriteJson(resp.Succ(data))
+	_ = r.Response.WriteJson(resp.Succ(data))
 	r.Exit()
 }
 
 func Fail(r *ghttp.Request, msg string) {
-	r.Response.WriteJson(resp.Fail(msg))
+	_ = r.Response.WriteJson(resp.Fail(msg))
 	r.Exit()
 }
 
 func Error(r *ghttp.Request, msg string) {
-	r.Response.WriteJson(resp.Error(msg))
+	_ = r.Response.WriteJson(resp.Error(msg))
 	r.Exit()
 }
 func Resp(r *ghttp.Request, code int, msg string, data interface{}) {
-	r.Response.WriteJson(resp.Resp{
+	_ = r.Response.WriteJson(resp.Resp{
 		Code: code,
 		Msg:  msg,
 		Data: data,
