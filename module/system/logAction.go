@@ -102,6 +102,7 @@ func (action *LogAction) Page(r *ghttp.Request) {
 	model := SysLog{}
 
 	page := model.Page(&form)
+
 	base.Succ(r,
 		g.Map{
 			"page":    form.Page,
