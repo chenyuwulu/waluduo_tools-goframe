@@ -9,6 +9,7 @@ import (
 	"gmanager/module/component/middle"
 	"gmanager/module/constants"
 	"gmanager/module/system"
+	"gmanager/module/we_service"
 	"gmanager/utils/base"
 	"strings"
 )
@@ -61,6 +62,11 @@ func bindRouter() {
 		g.GET("/config/get/{id}", configAction.Get)
 		g.ALL("/config/delete/{id}", configAction.Delete)
 
+	})
+	//绑定分组路由，这是we_service下的所有分组路由
+	s.Group(urlPath+"/we_service", func(g *ghttp.RouterGroup) {
+		ctxAction := new(we_service.CtxAction)
+		g.ALL("ctx",ctxAction)
 	})
 	//新增对应uniapp的api分组路由
 	s.Group(urlPath+"/api", func(g *ghttp.RouterGroup) {
