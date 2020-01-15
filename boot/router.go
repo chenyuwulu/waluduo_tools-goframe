@@ -65,8 +65,14 @@ func bindRouter() {
 	})
 	//绑定分组路由，这是we_service下的所有分组路由
 	s.Group(urlPath+"/we_service", func(g *ghttp.RouterGroup) {
+		//这个部分的专门用于测试使用
 		ctxAction := new(we_service.CtxAction)
 		g.ALL("ctx",ctxAction)
+
+		//文章
+		we_articleAction :=new(we_service.We_articleAction)
+		g.ALL("we_article",we_articleAction)
+
 	})
 	//新增对应uniapp的api分组路由
 	s.Group(urlPath+"/api", func(g *ghttp.RouterGroup) {
