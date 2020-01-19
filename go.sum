@@ -14,6 +14,8 @@ github.com/goflyfox/gtoken v1.3.9 h1:9WSFlk0R9Fy8vmbjKqR33Yqfsce9TYfn2lMwZ9zVOPU
 github.com/goflyfox/gtoken v1.3.9/go.mod h1:AdsIiP+9xYazR69j4dN1nLYdBoC+Xh3UVUYjqOM8OJs=
 github.com/gogf/gf v1.10.1 h1:mu1VWviGm8ucgFNODQnw8ourgvgNBBovbLFbot/70BY=
 github.com/gogf/gf v1.10.1/go.mod h1:/37gncPmuM06D4YSqiDze9GsasDtF2QnWkUfKeiGW/Q=
+github.com/gogf/gf v1.11.2 h1:fGXRk06DnR2w4tWTZu+aZbBmAVYEnB4FtDRXKMqPp6Q=
+github.com/gogf/gf v1.11.2/go.mod h1:/37gncPmuM06D4YSqiDze9GsasDtF2QnWkUfKeiGW/Q=
 github.com/golang/protobuf v1.3.1/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/gomodule/redigo v2.0.0+incompatible h1:K/R+8tc58AaqLkqG2Ol3Qk+DR/TlNuhuh457pBFPtt0=
 github.com/gomodule/redigo v2.0.0+incompatible/go.mod h1:B4C85qUVwatsJoIUNIfCRsp7qO0iAmpGFZ4EELWSbC4=
