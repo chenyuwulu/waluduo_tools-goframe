@@ -1,105 +1,63 @@
-# gmanager
+# waluduo_tools-goframe
 
-* 基于gf框架的管理后台，支持登录、认证、组织机构、用户帐号、角色权限、菜单、操作日志
-* gmanager已全面支持前后端分离，同时也支持服务端模板部署；
-* 登录组件使用gtoken完美支持集群部署
+* 本项目基于[gmanager](https://github.com/goflyfox/gmanager)进行开发，并且后续更新会尽量保持同步[gmanager](https://github.com/goflyfox/gmanager)和[goframe](https://github.com/gogf/gf)的更新方向。
+* 后台前端界面和客户端前端界面，是基于[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)和[uni-app](https://github.com/dcloudio/uni-app)，同样也会尽量保持同步更新到本项目。
 
-## 安装教程
+## 总项目仓库分布
 ### 代码地址
-* github地址：https://github.com/goflyfox/gmanager
-* gitee地址：https://gitee.com/goflyfox/gmanager
+* [waluduo_tools-goframe](https://github.com/chenyuwulu/waluduo_tools-goframe)：主要用于实现go后端方法。
+* [waluduo_tools-vue_admin](https://github.com/chenyuwulu/waluduo_tools-vue_admin)：后台前端界面。
+* [waluduo_tools-uniapp](https://github.com/chenyuwulu/waluduo_tools-uniapp)：用户(客户端)前端界面。
 
-### 下载部署
-1. 从git下载项目： git clone https://github.com/goflyfox/gmanager
-2. 安装mysql数据库，创建db，运行deploy下gmanager.sql脚本
+### 本项目结构
+```
+waluduo_tools-goframe
+│  .gitattributes               指定git项目的主语言
+│  .gitignore                   指定忽略git文件提交
+│  ChangeLog.md                 更新说明
+│  go.mod                       go mod
+│  go.sum                       go sum
+│  LICENSE                      开源协议
+│  main.go                      go入口文件
+│  Makefile                     Makefile
+│  README.md                    项目介绍
+├─app                           业务代码目录
+│  ├─api                        业务接口
+│  ├─component                  ├─组件
+│  │  ├─middle
+│  │  └─MiddlewareLog.go         └─访问日志中间件
+│  ├─constants                  常量
+│  ├─model                      实体对象   
+│  └─service                    业务层代码
+│      └─user                   
+│        └─userSvc.go           用户模块的curd方法
+├─boot                          启动类
+│  └─boot.go                    └─初始化类
+├─config                        配置目录
+│  └─config.toml                └─配置文件
+├─deploy                        部署项目资源
+│  ├─gmanager-web.sql           ├─vue-admin对应的侧边栏菜单数据
+│  └─gmanager.sql               └─数据库结构
+├─library                       公共方法  
+├─logs                          日志目录  
+├─public                        静态文件
+│  ├─favicon.ico
+│  └─component                  第三方组件                          
+├─router                        项目路由
+├─template                      (原)模板页面
+└─test                          测试代码
+```
+
+### 操作流程
+
+1. 从git下载项目： git clone https://github.com/chenyuwulu/waluduo_tools-goframe
+2. 安装mysql数据库，创建db，运行deploy下gmanager.sql脚本和gmanager-web.sql脚本
 3. 修改config下config.toml配置文件
 ```toml
 # 数据库配置
 [database]
     link = "root:123456@tcp(127.0.0.1:3306)/gmanager"
+            数据库帐号：数据库密码            数据库名称
 ```
 4. go run main.go
-5. 访问http://localhost即可看到登录页面，账号/密码：admin/123456
-
-### 服务端打包
-1. 打包可以使用gf提供的gf-cli进行打包
-2. 也可通过原始交叉编译命令
-
-打linux环境包
-```
-SET CGO_ENABLED=0
-SET GOOS=linux
-SET GOARCH=amd64
-go build main.go
-```
-
-打本地环境包
-```
-go build main.go
-```
-
-### 前后端分离说明
-1. gmanager完全支持前后端分离，前端使用vue-admin-template
-2. 前端运行下载github代码，运行`npm install&npm run dev`
-3. 具体前端代码及详细部署说明见： [https://github.com/goflyfox/gmanager-web](https://github.com/goflyfox/gmanager-web)
-4. 由于前后端分离和服务端模板菜单有所区别，数据库需要运行：gmanager-web.sql
-5. 如果有强迫症，使用前后端分离可以把public和template目录里面内容删除，但目录一定要保留；
-
-## 功能模块
-1. 登录、认证、登出
-2. 组织机构管理
-3. 用户管理
-4. 角色管理
-5. 菜单管理
-6. 日志管理
-7. 支持登录、登出、业务增删改操作记录
-8. 支持接口调用、返回参数打印，便于问题排查
-
-## 代码生成
-如需代码生成，请参考java项目：https://gitee.com/jflyfox/AutoCreate
-
-## 平台截图
-
-### 服务端模板截图
-登录：
-![image](https://raw.githubusercontent.com/goflyfox/gmanager/master/deploy/image/1.png)
-
-组织机构：
-![image](https://raw.githubusercontent.com/goflyfox/gmanager/master/deploy/image/2.png)
-
-用户管理：
-![image](https://raw.githubusercontent.com/goflyfox/gmanager/master/deploy/image/3.png)
-
-日志管理：
-![image](https://raw.githubusercontent.com/goflyfox/gmanager/master/deploy/image/4.png)
-
-### 前后端分离Vue截图
-登录：
-![image](https://raw.githubusercontent.com/goflyfox/gmanager/master/deploy/image/web1.png)
-
-组织机构：
-![image](https://raw.githubusercontent.com/goflyfox/gmanager/master/deploy/image/web2.png)
-
-用户管理：
-![image](https://raw.githubusercontent.com/goflyfox/gmanager/master/deploy/image/web3.png)
-
-日志管理：
-![image](https://raw.githubusercontent.com/goflyfox/gmanager/master/deploy/image/web4.png)
-
-## 感谢
-
-1. gf框架 [https://github.com/gogf/gf](https://github.com/gogf/gf) 
-
-## 项目支持
-
-- 项目的发展，离不开大家得支持~！~
-
-- [【双12】主会场 低至1折；请点击这里](https://www.aliyun.com/1212/2019/home?userCode=c4hsn0gc)
-- [阿里云：ECS云服务器2折起；请点击这里](https://www.aliyun.com/acts/limit-buy?spm=5176.11544616.khv0c5cu5.1.1d8e23e8XHvEIq&userCode=c4hsn0gc)
-- [阿里云：ECS云服务器新人优惠券；请点击这里](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=c4hsn0gc)
-
-- 也可以请作者喝一杯咖啡:)
-
-![jflyfox](https://raw.githubusercontent.com/jflyfox/jfinal_cms/master/doc/pay01.jpg "Open source support")
-
-[捐赠列表](deploy/Donate.md)
+5. 访问http://localhost:8011即可看到登录页面，账号/密码：admin/123456
