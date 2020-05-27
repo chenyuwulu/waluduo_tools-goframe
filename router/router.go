@@ -89,7 +89,7 @@ func bindRouter() {
 	//新增对应uniapp的api分组路由
 	s.Group(urlPath+"/uniapp", func(g *ghttp.RouterGroup) {
 		ArticleAction := new(uniapp.ArticleAction)
-		g.ALL("index", ArticleAction)
+		g.ALL("article", ArticleAction)
 	})
 
 	// 启动gtoken

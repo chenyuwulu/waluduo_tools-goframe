@@ -31,7 +31,7 @@ func (action *Action) List(r *ghttp.Request) {
 	}
 
 	base.Succ(r, g.Map{
-		"这里是中文": "list",
+		"这里是中文啊": "list",
 		"list": list,
 	})
 }

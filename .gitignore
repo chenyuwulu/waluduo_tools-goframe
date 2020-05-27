@@ -18,3 +18,4 @@ pkg
 .idea
 logs
 vendor
+bin
