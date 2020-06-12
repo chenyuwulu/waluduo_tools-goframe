@@ -44,7 +44,7 @@ url-path = ""
 
 # 数据库配置
 [database]
-    link = "mysql:root:root@tcp(127.0.0.1:3306)/gmanager"
+    link = "mysql:goframe:675687771@tcp(116.62.17.110:3306)/gmanager"
 
 [compiler]
     name     = "gmanager"
