@@ -14,7 +14,3 @@ func GetNow() string {
 func GetNowStamp() int64 {
 	return time.Now().Unix()
 }
-
-func TheTimemMuch() bool {
-
-}
