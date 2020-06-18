@@ -8,8 +8,8 @@ type BaseForm struct {
 	TotalPage     int    `form:"totalPage",json:"totalPage"`         // 总页数
 	TotalSize     int    `form:"totalSize",json:"totalSize"`         // 总共数据条数
 	OrderBy       string `form:"orderBy",json:"orderBy"`             // 排序
-	Appid         string `form:"appid",json:"appid"`                 // 排序
-	Secret        string `form:"secret",json:"secret"`               // 排序
+	Platform      string `form:"platform",json:"platform"`           // 排序
+	Config_id     string `form:"config_id",json:"config_id"`         // 排序
 	Code          string `form:"code",json:"code"`                   // 排序
 	EncryptedData string `form:"encryptedData",json:"encryptedData"` // 排序
 	Iv            string `form:"iv",json:"iv"`                       // 排序
@@ -32,11 +32,11 @@ func NewForm(params map[string]interface{}) BaseForm {
 	if value, ok := params["rows"]; ok {
 		form.Rows = gconv.Int(value)
 	}
-	if value, ok := params["appid"]; ok {
-		form.Appid = gconv.String(value)
+	if value, ok := params["platform"]; ok {
+		form.Platform = gconv.String(value)
 	}
-	if value, ok := params["secret"]; ok {
-		form.Secret = gconv.String(value)
+	if value, ok := params["config_id"]; ok {
+		form.Config_id = gconv.String(value)
 	}
 	if value, ok := params["code"]; ok {
 		form.Code = gconv.String(value)
