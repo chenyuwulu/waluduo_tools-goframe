@@ -56,8 +56,9 @@ func (action *ArticleAction) Index(r *ghttp.Request) {
 				glog.Error(errr)
 			} else {
 				base.Succ(r, g.Map{
-					"post":   form,
-					"result": result,
+					"post":       form,
+					"result":     result,
+					"configList": configList,
 				})
 			}
 		}
