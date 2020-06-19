@@ -30,7 +30,17 @@ func (action *ArticleAction) Index(r *ghttp.Request) {
 	var configList *ConfigList
 	//ConfigList, _ := db.GetOne("select * from waluduo_mp_wechat_config where id = ?", g.Slice{form.Config_id})
 	_ = g.DB().Table("waluduo_"+form.Platform+"_config").Where("id", form.Config_id).Scan(&configList)
-	if s, err := ghttp.Get("https://api.weixin.qq.com/sns/jscode2session?appid=" + configList.Appid + "&secret=" + configList.Secret + "&js_code=" + form.Code + "&grant_type=authorization_code"); err != nil {
+	var getUrl string
+	if form.Platform == "mp_wechat" {
+		getUrl = "https://api.weixin.qq.com/sns/jscode2session?appid=" + configList.Appid + "&secret=" + configList.Secret + "&js_code=" + form.Code + "&grant_type=authorization_code"
+	} //微信小程序平台
+	if form.Platform == "mp_qq" {
+		getUrl = "https://api.q.qq.com/sns/jscode2session?appid=" + configList.Appid + "&secret=" + configList.Secret + "&js_code=" + form.Code + "&grant_type=authorization_code"
+	} //QQ小程序平台
+	if form.Platform == "mp_bytedance" {
+		getUrl = "https://developer.toutiao.com/api/apps/jscode2session?appid=" + configList.Appid + "&secret=" + configList.Secret + "&code=" + form.Code
+	} //QQ小程序平台
+	if s, err := ghttp.Get(getUrl); err != nil {
 		glog.Error(err)
 	} else {
 		//这个方法是将返回数据对应到struct
