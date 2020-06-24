@@ -82,8 +82,8 @@ func bindRouter() {
 	s.Group(urlPath+"/we_service", func(g *ghttp.RouterGroup) {
 
 		//文章
-		we_articleAction :=new(we_service.Action)
-		g.ALL("we_article",we_articleAction)
+		we_articleAction := new(we_service.Action)
+		g.ALL("we_article", we_articleAction)
 
 	})
 	//新增对应uniapp的api分组路由
@@ -122,15 +122,15 @@ func bindRouter() {
 统一路由注册
 */
 func init() {
-	glog.Info("########router start...")
+	glog.Info("########路由服务启动中...")
 
-	s := g.Server()
+	s := g.Server() //初始化服务对象
 
 	// 绑定路由
 	bindRouter()
 
-	if constants.DEBUG {
-		g.DB().SetDebug(constants.DEBUG)
+	if constants.DEBUG { //如果debug是开启的话
+		g.DB().SetDebug(constants.DEBUG) //数据库开启debug
 	}
 
 	// 上线建议关闭
@@ -168,5 +168,5 @@ func init() {
 
 	started.StartLog()
 
-	glog.Info("########router finish.")
+	glog.Info("########路由服务启动完成.")
 }
