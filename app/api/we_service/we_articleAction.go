@@ -32,7 +32,14 @@ func (action *Action) List(r *ghttp.Request) {
 
 	base.Succ(r, g.Map{
 		"这里是中文啊": "list",
-		"list": list,
+		"list":   list,
+	})
+}
+
+func (action *Action) Index(r *ghttp.Request) {
+	base.Succ(r, g.Map{
+		"这是标签":       "这是内容",
+		"这是获取传过来的参数": r.GetRequestMap(),
 	})
 }
 
@@ -47,7 +54,6 @@ func (action *Action) Play_post(r *ghttp.Request) {
 	//	"model": model,
 	//	"userid": base.GetUser(r).Id,
 	//})
-
 
 	request := new(we_service.Request)
 	err := gconv.Struct(r.GetQueryMap(), request)

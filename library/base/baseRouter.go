@@ -11,10 +11,10 @@ import (
 
 var Token *gtoken.GfToken
 
-// BaseRouter baseRouter implemented global settings for all other routers.
-type BaseRouter struct {
-}
+// BaseRouter baseRouter 为所有其他路由器实现了全局设置.
+type BaseRouter struct{}
 
+//获取用户信息
 func GetUser(r *ghttp.Request) bean.SessionUser {
 	resp := Token.GetTokenData(r)
 	if !resp.Success() {
@@ -30,20 +30,25 @@ func GetUser(r *ghttp.Request) bean.SessionUser {
 	return sessionUser
 }
 
+//成功回调对象
 func Succ(r *ghttp.Request, data interface{}) {
 	_ = r.Response.WriteJson(resp.Succ(data))
 	r.Exit()
 }
 
+//失败回调字符串
 func Fail(r *ghttp.Request, msg string) {
 	_ = r.Response.WriteJson(resp.Fail(msg))
 	r.Exit()
 }
 
+//错误回调字符串
 func Error(r *ghttp.Request, msg string) {
 	_ = r.Response.WriteJson(resp.Error(msg))
 	r.Exit()
 }
+
+//自定义code，msg，data回调
 func Resp(r *ghttp.Request, code int, msg string, data interface{}) {
 	_ = r.Response.WriteJson(resp.Resp{
 		Code: code,
