@@ -1,10 +1,9 @@
 module gmanager
 
-go 1.14
+go 1.15
 
 require (
 	github.com/goflyfox/gtoken v1.3.16
 	github.com/gogf/gf v1.13.1
-	github.com/gogf/gf-cli v0.7.4 // indirect
 	github.com/xlstudio/wxbizdatacrypt v1.0.0
 )
