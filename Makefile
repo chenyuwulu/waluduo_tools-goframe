@@ -1,45 +1,25 @@
-# note: call scripts from /deploy
+.PHONY: all build run gotool clean help
 
-# project name
-PROJECTNAME=$(shell basename "$(PWD)")
+BINARY="gf-vue-admin"
 
-# project path
-ROOT=$(shell pwd)
+all: gotool build
 
-.PHONY: help
-all: help
-help: Makefile
-	@echo
-	@echo " Choose a command run in "$(PROJECTNAME)":"
-	@echo
-	@sed -n 's/^##//p' $< | column -t -s ':' |  sed -e 's/^/ /'
-	@echo
-
-## vendor: go mod vendor
-## tidy: go mod tidy
-## build: go build -mod=vendor
-## run: go run main.go
-## mod: update or clear mod pkg, do=tidy  or do=vendor
-mod:
-	@echo "use mod"
-	@./deploy/pkg.sh $(ROOT) $(do)
-
-vendor:
-	@echo "use mod vendor"
-	@export GO111MODULE=on
-	@export GOPROXY=https://goproxy.io
-	@go mod vendor
-
-tidy:
-	@echo "use mod tidy"
-	@export GO111MODULE=on
-	@export GOPROXY=https://goproxy.io
-	@go mod tidy
-
-#go build -ldflags "-s -w"
 build:
-	@go build -mod=vendor
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ${BINARY}
 
 run:
-	@echo "go run main.go"
-	@go run main.go
+	@go run ./
+
+gotool:
+	go fmt ./
+	go vet ./
+
+clean:
+	@if [ -f ${BINARY} ] ; then rm ${BINARY} ; fi
+
+help:
+	@echo "make - 格式化 Go 代码, 并编译生成二进制文件"
+	@echo "make build - 编译 Go 代码, 生成二进制文件"
+	@echo "make run - 直接运行 Go 代码"
+	@echo "make clean - 移除二进制文件和 vim swap files"
+	@echo "make gotool - 运行 Go 工具 'fmt' and 'vet'"

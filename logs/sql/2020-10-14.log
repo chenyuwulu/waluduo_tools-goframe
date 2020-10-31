@@ -1,0 +1,13 @@
+2020-10-14 17:52:59.002 [DEBU] [108 ms] [default] SHOW FULL COLUMNS FROM `admins`
+2020-10-14 17:52:59.033 [DEBU] [ 30 ms] [default] SELECT * FROM `admins` WHERE `username`='admin' AND `delete_at` IS NULL LIMIT 1
+2020-10-14 17:52:59.049 [DEBU] [ 16 ms] [default] SHOW FULL COLUMNS FROM `authorities`
+2020-10-14 17:52:59.079 [DEBU] [ 29 ms] [default] SELECT * FROM `authorities` WHERE `authority_id`='888' AND `delete_at` IS NULL LIMIT 1
+2020-10-14 17:52:59.460 [DEBU] [ 15 ms] [default] SHOW FULL COLUMNS FROM `jwts`
+2020-10-14 17:52:59.491 [DEBU] [ 30 ms] [default] SELECT * FROM `jwts` WHERE `jwt`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9hdXRob3JpdHlfaWQiOiI4ODgiLCJhZG1pbl9pZCI6MSwiYWRtaW5fbmlja25hbWUiOiLotoXnuqfnrqHnkIblkZgiLCJhZG1pbl91dWlkIjoiYjRjNTRlNWEtZDAxNS00ZjhjLTlmMDEtNjI0YzUyN2E2M2FlIiwiZXhwIjoxNjAyNzU1NTc5LCJvcmlnX2lhdCI6MTYwMjY2OTE3OX0._LMr9iD0DtY77rUh7ySIX0omWvNkSEZ4VuSMwsKlhzc' AND `delete_at` IS NULL LIMIT 1
+2020-10-14 17:52:59.613 [DEBU] [ 16 ms] [default] SHOW FULL COLUMNS FROM `menus`
+2020-10-14 17:52:59.628 [DEBU] [ 15 ms] [default] SHOW FULL COLUMNS FROM `authority_menu`
+2020-10-14 17:52:59.659 [DEBU] [ 30 ms] [default] SELECT * FROM `menus` m RIGHT JOIN `authority_menu` a ON (m.id=a.menu_id) WHERE `authority_id`='888' AND `m`.`delete_at` IS NULL ORDER BY `sort`
+2020-10-14 17:53:27.741 [DEBU] [ 31 ms] [default] SELECT * FROM `jwts` WHERE `jwt`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9hdXRob3JpdHlfaWQiOiI4ODgiLCJhZG1pbl9pZCI6MSwiYWRtaW5fbmlja25hbWUiOiLotoXnuqfnrqHnkIblkZgiLCJhZG1pbl91dWlkIjoiYjRjNTRlNWEtZDAxNS00ZjhjLTlmMDEtNjI0YzUyN2E2M2FlIiwiZXhwIjoxNjAyNzU1NTc5LCJvcmlnX2lhdCI6MTYwMjY2OTE3OX0._LMr9iD0DtY77rUh7ySIX0omWvNkSEZ4VuSMwsKlhzc' AND `delete_at` IS NULL LIMIT 1
+2020-10-14 17:53:27.909 [DEBU] [ 31 ms] [default] SELECT * FROM `menus` m RIGHT JOIN `authority_menu` a ON (m.id=a.menu_id) WHERE `authority_id`='888' AND `m`.`delete_at` IS NULL ORDER BY `sort`
+2020-10-14 17:54:46.648 [DEBU] [ 79 ms] [default] SELECT * FROM `jwts` WHERE `jwt`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9hdXRob3JpdHlfaWQiOiI4ODgiLCJhZG1pbl9pZCI6MSwiYWRtaW5fbmlja25hbWUiOiLotoXnuqfnrqHnkIblkZgiLCJhZG1pbl91dWlkIjoiYjRjNTRlNWEtZDAxNS00ZjhjLTlmMDEtNjI0YzUyN2E2M2FlIiwiZXhwIjoxNjAyNzU1NTc5LCJvcmlnX2lhdCI6MTYwMjY2OTE3OX0._LMr9iD0DtY77rUh7ySIX0omWvNkSEZ4VuSMwsKlhzc' AND `delete_at` IS NULL LIMIT 1
+2020-10-14 17:54:46.764 [DEBU] [ 13 ms] [default] SELECT * FROM `menus` WHERE `delete_at` IS NULL ORDER BY `sort`

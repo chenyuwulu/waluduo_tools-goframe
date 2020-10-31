@@ -1,22 +1,19 @@
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-*.sum
-# Test binary, built with `go test -c`
-*.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
-
-# third
-
-# other
-pkg
-.idea
-logs
-vendor
-bin
-config/*
+.buildpath
+.hgignore.swp
+.project
+.orig
+.swp
+.idea/
+.settings/
+.vscode/
+vender/
+log/
+composer.lock
+gitpush.sh
+pkg/
+bin/
+cbuild
+*/.DS_Store
+main
+.vscode
+go.sum

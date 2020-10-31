@@ -1,172 +1,24 @@
 package router
 
-import (
-	"github.com/goflyfox/gtoken/gtoken"
-	"github.com/gogf/gf/frame/g"
-	"github.com/gogf/gf/net/ghttp"
-	"github.com/gogf/gf/os/glog"
-	"gmanager/app/api/common"
-	"gmanager/app/api/config"
-	"gmanager/app/api/department"
-	"gmanager/app/api/log"
-	"gmanager/app/api/menu"
-	"gmanager/app/api/role"
-	"gmanager/app/api/uniapp"
-	"gmanager/app/api/user"
-	"gmanager/app/api/we_service"
-	"gmanager/app/component/middle"
-	"gmanager/app/component/started"
-	"gmanager/app/constants"
-	"gmanager/library/base"
-	"strings"
-)
+import "github.com/gogf/gf/frame/g"
 
-/*
-绑定业务路由
-*/
-func bindRouter() {
-	urlPath := g.Config().GetString("url-path")
-	s := g.Server()
-	// 首页
-	s.BindHandler(urlPath+"/", common.Login)
-	s.BindHandler(urlPath+"/main.html", common.Index)
-	s.BindHandler(urlPath+"/login", common.Login)
-
-	s.BindHandler(urlPath+"/welcome", common.Welcome)
-	s.BindHandler(urlPath+"/admin/welcome.html", common.Welcome)
-	// 中间件
-	s.BindMiddleware(urlPath+"/*", middle.MiddlewareLog)
-	s.BindMiddleware(urlPath+"/*", middle.MiddlewareCommon)
-	//绑定分组路由，这是system下的所有分组路由
-	s.Group(urlPath+"/system", func(g *ghttp.RouterGroup) {
-		// 允许跨域
-		g.Middleware(func(r *ghttp.Request) {
-			r.Response.CORSDefault()
-			r.Middleware.Next()
-		})
-
-		// 系统路由
-		userAction := new(user.Action)
-		g.ALL("user", userAction)
-		g.GET("/user/get/{id}", userAction.Get)
-		g.ALL("user/delete/{id}", userAction.Delete)
-
-		departAction := new(department.Action)
-		g.ALL("department", departAction)
-		g.GET("/department/get/{id}", departAction.Get)
-		g.ALL("/department/delete/{id}", departAction.Delete)
-
-		logAction := new(log.Action)
-		g.ALL("log", logAction)
-		g.GET("/log/get/{id}", logAction.Get)
-		g.ALL("/log/delete/{id}", logAction.Delete)
-
-		menuAction := new(menu.Action)
-		g.ALL("menu", menuAction)
-		g.GET("/menu/get/{id}", menuAction.Get)
-		g.ALL("/menu/delete/{id}", menuAction.Delete)
-
-		roleAction := new(role.Action)
-		g.ALL("role", roleAction)
-		g.GET("/role/get/{id}", roleAction.Get)
-		g.ALL("/role/delete/{id}", roleAction.Delete)
-
-		configAction := new(config.Action)
-		g.ALL("config", configAction)
-		g.GET("/config/get/{id}", configAction.Get)
-		g.ALL("/config/delete/{id}", configAction.Delete)
-
-	})
-
-	//绑定分组路由，这是we_service下的所有分组路由
-	s.Group(urlPath+"/we_service", func(g *ghttp.RouterGroup) {
-
-		//文章
-		we_articleAction := new(we_service.Action)
-		g.ALL("we_article", we_articleAction)
-
-	})
-	//新增对应uniapp的api分组路由
-	s.Group(urlPath+"/uniapp", func(g *ghttp.RouterGroup) {
-		ArticleAction := new(uniapp.ArticleAction)
-		g.ALL("article", ArticleAction)
-	})
-
-	// 启动gtoken
-	base.Token = &gtoken.GfToken{
-		//Timeout:         10 * 1000,
-		CacheMode:        g.Config().GetInt8("gtoken.cache-mode"),
-		MultiLogin:       g.Config().GetBool("gtoken.multi-login"),
-		LoginPath:        "/login/submit",
-		LoginBeforeFunc:  common.LoginSubmit,
-		LogoutPath:       "/user/logout",
-		LogoutBeforeFunc: common.LogoutBefore,
-		AuthPaths:        g.SliceStr{"/user", "/system"},
-		AuthBeforeFunc: func(r *ghttp.Request) bool {
-			// 静态页面不拦截
-			if r.IsFileRequest() {
-				return false
-			}
-
-			if strings.HasSuffix(r.URL.Path, "index") {
-				return false
-			}
-
-			return true
-		},
-	}
-	base.Token.Start()
-}
-
-/*
-统一路由注册
-*/
-func init() {
-	glog.Info("########路由服务启动中...")
-
-	s := g.Server() //初始化服务对象
-
-	// 绑定路由
-	bindRouter()
-
-	if constants.DEBUG { //如果debug是开启的话
-		g.DB().SetDebug(constants.DEBUG) //数据库开启debug
-	}
-
-	// 上线建议关闭
-	s.BindHandler("/debug", common.Debug)
-
-	// 301错误页面
-	s.BindStatusHandler(301, common.Error301)
-	// 404错误页面
-	s.BindStatusHandler(404, common.Error404)
-	// 500错误页面
-	s.BindStatusHandler(500, common.Error500)
-
-	// 某些浏览器直接请求favicon.ico文件，特别是产生404时
-	s.SetRewrite("/favicon.ico", "/resources/images/favicon.ico")
-
-	// 管理接口
-	s.EnableAdmin("/admin")
-
-	// 为平滑重启管理页面设置HTTP Basic账号密码
-	//s.BindHookHandler("/admin/*", ghttp.HOOK_BEFORE_SERVE, func(r *ghttp.Request) {
-	//	user := g.Config().GetString("admin.user")
-	//	pass := g.Config().GetString("admin.pass")
-	//	if !r.BasicAuth(user, pass) {
-	//		r.ExitAll()
-	//	}
-	//})
-
-	// 强制跳转到HTTPS访问
-	//g.Server().BindHookHandler("/*", ghttp.HOOK_BEFORE_SERVE, func(r *ghttp.Request) {
-	//    if !r.IsFileServe() && r.TLS == nil {
-	//        r.Response.RedirectTo(fmt.Sprintf("https://%s%s", r.Host, r.URL.String()))
-	//        r.ExitAll()
-	//    }
-	//})
-
-	started.StartLog()
-
-	glog.Info("########路由服务启动完成.")
+// InitializeRouters 初始化总路由
+func InitializeRouters() {
+	InitJwtRouter()              // jwt相关路由
+	InitApiRouter()              // 功能api路由
+	InitFileRouter()             // 文件上传下载功能路由
+	InitMenuRouter()             // menu路由
+	InitBaseRouter()             // 基础功能路由 不做鉴权
+	InitEmailRouter()            // 邮件相关路由
+	InitAdminsRouter()           // 用户路由
+	InitCasbinRouter()           // 权限相关路由
+	InitSystemRouter()           // 系统配置路由
+	InitCustomerRouter()         // 客户路由
+	InitAutoCodeRouter()         // 创建自动化代码
+	InitAuthorityRouter()        // 角色路由
+	InitOperationRouter()        // 操作记录路由
+	InitDictionaryRouter()       // 字典管理路由
+	InitSimpleUploadRouter()     // 断点续传功能路由
+	InitDictionaryDetailRouter() // 字典详情管理路由
+	g.Log().Info(g.I18n().Translate(`{#Prefix} {#router} {#register} {#success}`, "zh-CN"))
 }
