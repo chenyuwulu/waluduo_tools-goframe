@@ -5,7 +5,7 @@ require (
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
 	github.com/casbin/casbin v1.9.1
 	github.com/casbin/casbin/v2 v2.11.0
-	github.com/gogf/gf v1.13.7
+	github.com/gogf/gf v1.14.2
 	github.com/gogf/gf-jwt v1.1.0
 	github.com/gogf/guuid v1.0.0
 	github.com/jordan-wright/email v0.0.0-20200917010138-e1c00e156980
@@ -17,4 +17,4 @@ require (
 	golang.org/x/time v0.0.0-20200630173020-3af7569d3a1e // indirect
 )
 
-go 1.11
+go 1.23

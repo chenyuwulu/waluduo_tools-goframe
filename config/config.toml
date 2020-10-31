@@ -16,11 +16,11 @@ Stdout = true
 [database]
 # 默认启动Mysql配置
 [database.default]
-Host = "127.0.0.1"
+Host = "116.62.17.110"
 Port = "3306"
-User = "root"
-Pass = "gdkid,,.."
-Name = "gf-vue-admin"
+User = "gf_vue_admin"
+Pass = "675687771"
+Name = "gf_vue_admin"
 Type = "mysql"
 Role = ""
 Debug = true
